@@ -1,0 +1,10 @@
+# cabal
+dist
+dist-*
+.ghc.*
+
+# nix
+result
+
+# direnv
+.direnv

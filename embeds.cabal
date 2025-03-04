@@ -1,0 +1,67 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           embeds
+version:        0.0.1
+synopsis:       Embeddings through natural transformations
+description:    Embeddings through natural transformations
+category:       Natural Transformation, mtl, Monad transformers
+homepage:       https://github.com/marcosh/embeds
+bug-reports:    https://github.com/marcosh/embeds/issues
+author:         Marco Perone
+maintainer:     pasafama@gmail.com
+copyright:      2025 Marco Perone
+license:        OtherLicense
+license-file:   LICENSE
+build-type:     Simple
+tested-with:
+    GHC ==9.6.6
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+library
+  exposed-modules:
+      Embeds.Mtl
+      Embeds.NatTrans
+      Embeds.RebindedDo
+  other-modules:
+      Paths_embeds
+  hs-source-dirs:
+      src
+  default-extensions:
+      DerivingStrategies
+      LambdaCase
+      PackageImports
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
+  build-depends:
+      base >=4.15 && <4.21
+    , mmorph
+    , mtl
+  default-language: GHC2021
+
+test-suite event-system-spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Embeds.NatTransSpec
+      Embeds.RebindedDoSpec
+      Paths_embeds
+  hs-source-dirs:
+      spec
+  default-extensions:
+      DerivingStrategies
+      LambdaCase
+      PackageImports
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
+  build-tool-depends:
+      hspec-discover:hspec-discover
+  build-depends:
+      base >=4.15 && <4.21
+    , embeds
+    , hspec
+    , transformers
+  default-language: GHC2021
