@@ -44,6 +44,7 @@ library:
   dependencies:
     - mmorph
     - mtl
+    - transformers
 
 tests:
   event-system-spec:

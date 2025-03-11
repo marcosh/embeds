@@ -41,6 +41,7 @@ library
       base >=4.15 && <4.21
     , mmorph
     , mtl
+    , transformers
   default-language: GHC2021
 
 test-suite event-system-spec

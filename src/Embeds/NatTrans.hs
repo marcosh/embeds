@@ -3,6 +3,8 @@ module Embeds.NatTrans where
 import "base" Data.Functor.Identity
 import "base" Data.Kind (Type)
 import "mmorph" Control.Monad.Morph hiding (embed)
+import "transformers" Control.Monad.Trans.Maybe (MaybeT, hoistMaybe)
+import "transformers" Control.Monad.Trans.Except (ExceptT, except)
 
 -- | This says that there is a natural transformation (another way to say this could be "a way of mapping a functor into another functor") between `m` and `n`
 class Embeds m n where
@@ -40,3 +42,13 @@ instance {-# OVERLAPPING #-} Embeds Identity Identity where
 instance {-# OVERLAPPING #-} forall t (m :: Type -> Type). (Applicative (t m)) => Embeds Identity (t m) where
   embed :: Identity a -> (t m) a
   embed = pure . runIdentity
+
+-- | this instance is needed since `Maybe` is not defined as `MaybeT Identity`
+instance {-# OVERLAPPING #-} Applicative m => Embeds Maybe (MaybeT m) where
+  embed :: Maybe a -> MaybeT m a
+  embed = hoistMaybe
+
+-- | this instance is needed since `Either e` is not defined as `ExceptT e Identity`
+instance {-# OVERLAPPING #-} Monad m => Embeds (Either e) (ExceptT e m) where
+  embed :: Either e a -> ExceptT e m a
+  embed = except
